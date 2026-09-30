@@ -14,7 +14,10 @@ export interface CalendarEvent {
 }
 
 function stamp(ms: number): string {
-  return new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return new Date(ms)
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}/, '');
 }
 
 /** Escape text values (section 3.3.11). */
@@ -46,7 +49,13 @@ export function foldLine(line: string): string {
 }
 
 export function buildCalendar(events: CalendarEvent[], now = Date.now()): string {
-  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Terik//Heat plan//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Terik//Heat plan//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+  ];
   for (const e of events) {
     lines.push('BEGIN:VEVENT');
     lines.push(`UID:${e.uid}`);

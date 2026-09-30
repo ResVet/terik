@@ -8,10 +8,61 @@
  *
  * One difference from that routine: it counts days from J2000 with
  * `365 * dy + dy / 4 (+1 after 2000)`, which is one day too high for every
- * date in a leap year after 2000 (2004, 2008, ... 2024), which moves the sun
- * by up to 0.16° of elevation on those dates. Here the day count comes
- * straight from the UTC timestamp. `referenceSunPosition()` keeps the original
- * arithmetic so the validation suite can reproduce the C output.
+ * date in a leap year after 2000 (2004, 2008, ... 2024). The sun is then
+ * placed where it would be a day later: up to 0.4° off in elevation around
+ * the equinoxes, when the declination changes fastest. Here the day count
+ * comes straight from the UTC timestamp. `referenceSunPosition()` keeps the
+ * original arithmetic so the validation suite can reproduce the C output.
+ */
+
+/*
+ * solarposition() is part of Liljegren's WBGT program; the position formulas
+ * here are ported from it by Raffa Gamadan Rifandi, 2026, with the day count
+ * changed as described above. The original licence:
+ *
+ *              Copyright (c) 2008, UChicago Argonne, LLC
+ *                      All Rights Reserved
+ *
+ *                       WBGT, Version 1.1
+ *
+ *                      James C. Liljegren
+ *           Decision & Information Sciences Division
+ *
+ *                     OPEN SOURCE LICENSE
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer. Software changes,
+ *    modifications, or derivative works, should be noted with comments and
+ *    the author and organization's name.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the names of UChicago Argonne, LLC or the Department of Energy
+ *    nor the names of its contributors may be used to endorse or promote
+ *    products derived from this software without specific prior written
+ *    permission.
+ *
+ * 4. The software and the end-user documentation included with the
+ *    redistribution, if any, must include the following acknowledgment:
+ *
+ *    "This product includes software produced by UChicago Argonne, LLC
+ *    under Contract No. DE-AC02-06CH11357 with the Department of Energy."
+ *
+ * DISCLAIMER
+ *
+ * THE SOFTWARE IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+ *
+ * NEITHER THE UNITED STATES GOVERNMENT, NOR THE UNITED STATES DEPARTMENT OF
+ * ENERGY, NOR UCHICAGO ARGONNE, LLC, NOR ANY OF THEIR EMPLOYEES, MAKES ANY
+ * WARRANTY, EXPRESS OR IMPLIED, OR ASSUMES ANY LEGAL LIABILITY OR
+ * RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF ANY
+ * INFORMATION, DATA, APPARATUS, PRODUCT, OR PROCESS DISCLOSED, OR REPRESENTS
+ * THAT ITS USE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS.
  */
 
 export const SOLAR_CONSTANT = 1367; // W/m², as used by Liljegren et al. (2008)
@@ -87,21 +138,16 @@ function sunPositionCore(
   const meanAnomaly = frac((357.528 + 0.9856003 * days) / 360) * TWO_PI;
   const meanLongitude = frac((280.46 + 0.9856474 * days) / 360) * TWO_PI;
   const obliquity = (23.439 - 4.0e-7 * days) * DEG;
-  const eclipticLongitude =
-    (1.915 * Math.sin(meanAnomaly) + 0.02 * Math.sin(2 * meanAnomaly)) * DEG + meanLongitude;
+  const eclipticLongitude = (1.915 * Math.sin(meanAnomaly) + 0.02 * Math.sin(2 * meanAnomaly)) * DEG + meanLongitude;
 
   const distance = 1.00014 - 0.01671 * Math.cos(meanAnomaly) - 0.00014 * Math.cos(2 * meanAnomaly);
 
-  let rightAscension = Math.atan2(
-    Math.cos(obliquity) * Math.sin(eclipticLongitude),
-    Math.cos(eclipticLongitude),
-  );
+  let rightAscension = Math.atan2(Math.cos(obliquity) * Math.sin(eclipticLongitude), Math.cos(eclipticLongitude));
   if (rightAscension < 0) rightAscension += TWO_PI;
   const raHours = frac(rightAscension / TWO_PI) * 24;
   const declination = Math.asin(Math.sin(obliquity) * Math.sin(eclipticLongitude));
 
-  let gmst0h =
-    24110.54841 + centuries0h * (8640184.812866 + centuries0h * (0.093104 - centuries0h * 6.2e-6));
+  let gmst0h = 24110.54841 + centuries0h * (8640184.812866 + centuries0h * (0.093104 - centuries0h * 6.2e-6));
   gmst0h = frac(gmst0h / 3600 / 24) * 24;
   if (gmst0h < 0) gmst0h += 24;
 
@@ -232,8 +278,7 @@ export function intervalGeometry(
   const width = 2 * halfWidth;
   const cosZenith = sunlit > 0 ? Math.max(0, integral / sunlit) : 0;
   const sunlitFraction = width > 0 ? Math.min(1, sunlit / width) : 0;
-  const toaIrradiance =
-    (SOLAR_CONSTANT / (sun.distance * sun.distance)) * cosZenith * sunlitFraction;
+  const toaIrradiance = (SOLAR_CONSTANT / (sun.distance * sun.distance)) * cosZenith * sunlitFraction;
 
   return { cosZenith, sunlitFraction, toaIrradiance, distance: sun.distance };
 }

@@ -14,7 +14,7 @@ function sampleSeries() {
   const wbgt: number[] = [];
   for (let i = 0; i < 72; i++) {
     const t = start + i * HOUR;
-    const hour = (i % 24);
+    const hour = i % 24;
     const dayShift = Math.floor(i / 24) === 1 ? -2 : 0;
     time.push(t);
     wbgt.push(25 + dayShift + 6 * Math.max(0, Math.sin((Math.PI * (hour - 6)) / 12)));
@@ -67,7 +67,8 @@ describe('activity windows', () => {
   it('skips windows that have already started', () => {
     const { time, wbgt, start } = sampleSeries();
     const notBefore = start + 30 * HOUR;
-    for (const w of rankWindows({ time, wbgt }, { ...baseOptions, notBefore })) expect(w.start).toBeGreaterThanOrEqual(notBefore);
+    for (const w of rankWindows({ time, wbgt }, { ...baseOptions, notBefore }))
+      expect(w.start).toBeGreaterThanOrEqual(notBefore);
   });
 
   it('never returns overlapping windows and gives one per day', () => {
@@ -92,9 +93,16 @@ describe('activity windows', () => {
     const time = [0, 1, 2, 3, 4, 5].map((h) => Date.UTC(2026, 9, 1, h)); // 07:00-12:00 WIB
     const wbgt = [26, 26, 26, 26, 26, 26];
     const worseChance = [0.6, 0.6, 0.0, 0.0, 0.0, 0.6];
-    const ranked = rankWindows({ time, wbgt, worseChance }, {
-      ...baseOptions, durationMinutes: 60, earliest: 0, latest: 1440, notBefore: 0,
-    });
+    const ranked = rankWindows(
+      { time, wbgt, worseChance },
+      {
+        ...baseOptions,
+        durationMinutes: 60,
+        earliest: 0,
+        latest: 1440,
+        notBefore: 0,
+      },
+    );
     expect(ranked[0]!.worseChance).toBe(0);
   });
 });
@@ -104,7 +112,12 @@ describe('iCalendar export', () => {
     expect(escapeText('a,b;c\\d\ne')).toBe('a\\,b\\;c\\\\d\\ne');
     const folded = foldLine('DESCRIPTION:' + 'é'.repeat(60));
     for (const line of folded.split('\r\n')) expect(new TextEncoder().encode(line).length).toBeLessThanOrEqual(75);
-    expect(folded.split('\r\n').slice(1).every((l) => l.startsWith(' '))).toBe(true);
+    expect(
+      folded
+        .split('\r\n')
+        .slice(1)
+        .every((l) => l.startsWith(' ')),
+    ).toBe(true);
   });
 
   it('writes a valid calendar with UTC times', () => {

@@ -10,8 +10,13 @@
  * Grundstein A, Williams C, Phan M, Cooper E. Regional heat safety thresholds
  * for athletics in the contiguous United States. Appl Geogr. 2015;56:55-60.
  *
- * Football matches use the FIFPRO recommendation: cooling breaks between
- * 28 and 32 °C WBGT, and rescheduling above 32 °C.
+ * Football follows FIFPRO's guidance for professional football (2023):
+ * cooling breaks from 26 °C WBGT, and delaying or postponing the match from
+ * 28 °C. FIFA's own rule is laxer, with mandatory cooling breaks only above
+ * 32 °C; the players' union figures are used because they protect players.
+ *
+ * FIFPRO. Eleven tips for dealing with hot conditions in professional
+ * football. 17 August 2023. https://www.fifpro.org/articles/2023/08/eleven-tips-for-dealing-with-hot-conditions-in-professional-football
  */
 
 export type SportRegion = 1 | 2 | 3;
@@ -27,7 +32,7 @@ export const SPORT_THRESHOLDS: Record<SportRegion, readonly [number, number, num
   3: [27.8, 30.6, 32.2, 33.4],
 };
 
-export const FOOTBALL_THRESHOLDS = { coolingBreaks: 28, reschedule: 32 } as const;
+export const FOOTBALL_THRESHOLDS = { coolingBreaks: 26, reschedule: 28 } as const;
 
 /**
  * Region category from the 90th percentile of warm-season daily maximum WBGT

@@ -83,8 +83,17 @@ export function trendTest(values: ArrayLike<number>, times?: ArrayLike<number>, 
   const n = x.length;
   if (n < 4) {
     return {
-      n, s: 0, varianceS: Number.NaN, inflation: Number.NaN, z: Number.NaN, p: Number.NaN, tau: Number.NaN,
-      slope: Number.NaN, slopeLow: Number.NaN, slopeHigh: Number.NaN, intercept: Number.NaN,
+      n,
+      s: 0,
+      varianceS: Number.NaN,
+      inflation: Number.NaN,
+      z: Number.NaN,
+      p: Number.NaN,
+      tau: Number.NaN,
+      slope: Number.NaN,
+      slopeLow: Number.NaN,
+      slopeHigh: Number.NaN,
+      intercept: Number.NaN,
     };
   }
 

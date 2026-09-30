@@ -65,7 +65,10 @@ describe('assess', () => {
       const bounds = levelThresholds(settings);
       for (let w = 18; w <= 38; w += 0.013) {
         const { level } = assess(w, settings);
-        const expected = 1 + bounds.filter((b) => (settings.profile === 'sport' || settings.profile === 'football' ? w >= b : w > b)).length;
+        const expected =
+          1 +
+          bounds.filter((b) => (settings.profile === 'sport' || settings.profile === 'football' ? w >= b : w > b))
+            .length;
         expect(level).toBe(expected);
       }
     }
@@ -76,12 +79,12 @@ describe('assess', () => {
     expect(assess(28, { ...moderate, profile: 'sport', clothing: 'vapourBarrier' }).effectiveWbgt).toBe(28);
   });
 
-  it('maps football to breaks between 28 and 32 °C and rescheduling above', () => {
+  it('maps football to cooling breaks from 26 °C and postponement from 28 °C (FIFPRO)', () => {
     const football: ProfileSettings = { ...moderate, profile: 'football' };
-    expect(assess(27.9, football).level).toBe(1);
-    expect(assess(28, football).level).toBe(3);
-    expect(assess(31.9, football).level).toBe(3);
-    expect(assess(32, football).level).toBe(5);
+    expect(assess(25.9, football).level).toBe(1);
+    expect(assess(26, football).level).toBe(3);
+    expect(assess(27.9, football).level).toBe(3);
+    expect(assess(28, football).level).toBe(5);
   });
 });
 

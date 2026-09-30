@@ -4,17 +4,58 @@
  * bulb globe temperature using standard meteorological measurements.
  * J Occup Environ Hyg. 2008;5(10):645-55.
  *
- * TypeScript port of WBGT version 1.1 (calc_wbgt, Tglobe, Twb and helpers) by
- * Raffa Gamadan Rifandi, 2026. The equations, constants, iteration scheme and
- * convergence rule are unchanged; the port runs in double precision and adds a
+ * TypeScript port of WBGT version 1.1 (calc_wbgt, Tglobe, Twb and helpers),
+ * made by Raffa Gamadan Rifandi in 2026. The equations, constants, iteration
+ * scheme and convergence rule are unchanged. The changes: the port runs in
+ * double precision, takes the sun position from solar.ts, and adds a
  * bracketed fallback solver for inputs where the fixed-point iteration does
- * not settle within 50 steps. See NOTICE for the original licence.
+ * not settle within 50 steps.
  *
- * "This product includes software produced by UChicago Argonne, LLC under
- * Contract No. DE-AC02-06CH11357 with the Department of Energy."
- * Original: Copyright (c) 2008, UChicago Argonne, LLC. All Rights Reserved.
- * Author of the original: James C. Liljegren, Decision & Information Sciences
- * Division, Argonne National Laboratory.
+ * The original program, and so this file, are covered by its licence:
+ *
+ *              Copyright (c) 2008, UChicago Argonne, LLC
+ *                      All Rights Reserved
+ *
+ *                       WBGT, Version 1.1
+ *
+ *                      James C. Liljegren
+ *           Decision & Information Sciences Division
+ *
+ *                     OPEN SOURCE LICENSE
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer. Software changes,
+ *    modifications, or derivative works, should be noted with comments and
+ *    the author and organization's name.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * 3. Neither the names of UChicago Argonne, LLC or the Department of Energy
+ *    nor the names of its contributors may be used to endorse or promote
+ *    products derived from this software without specific prior written
+ *    permission.
+ *
+ * 4. The software and the end-user documentation included with the
+ *    redistribution, if any, must include the following acknowledgment:
+ *
+ *    "This product includes software produced by UChicago Argonne, LLC
+ *    under Contract No. DE-AC02-06CH11357 with the Department of Energy."
+ *
+ * DISCLAIMER
+ *
+ * THE SOFTWARE IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+ *
+ * NEITHER THE UNITED STATES GOVERNMENT, NOR THE UNITED STATES DEPARTMENT OF
+ * ENERGY, NOR UCHICAGO ARGONNE, LLC, NOR ANY OF THEIR EMPLOYEES, MAKES ANY
+ * WARRANTY, EXPRESS OR IMPLIED, OR ASSUMES ANY LEGAL LIABILITY OR
+ * RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF ANY
+ * INFORMATION, DATA, APPARATUS, PRODUCT, OR PROCESS DISCLOSED, OR REPRESENTS
+ * THAT ITS USE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS.
  */
 
 import { SOLAR_CONSTANT, apparentCosZenith, referenceSunPosition } from './solar';
@@ -92,7 +133,7 @@ function diffusivity(tempK: number, pressureHpa: number): number {
   return ((a * Math.pow(tempK / tcrit12, b) * pcrit13 * tcrit512 * mmix) / patm) * 1e-4;
 }
 
-/** Heat of evaporation, J/kg (linear fit valid for 283–313 K). */
+/** Heat of evaporation, J/kg (linear fit valid for 283 to 313 K). */
 function heatOfEvaporation(tempK: number): number {
   return ((313.15 - tempK) / 30) * -71100 + 2.4073e6;
 }
@@ -157,7 +198,7 @@ function brent(
       s = b - (fb * (b - a)) / (fb - fa);
     }
     const q = (3 * a + b) / 4;
-    const outside = !((s > Math.min(q, b) && s < Math.max(q, b)));
+    const outside = !(s > Math.min(q, b) && s < Math.max(q, b));
     if (
       outside ||
       (mflag && Math.abs(s - b) >= Math.abs(b - c) / 2) ||
@@ -275,8 +316,7 @@ function globeTemperature(tairK: number, rh: number, pressure: number, speed: nu
   // With no direct beam the geometric term is skipped rather than
   // multiplying zero by 1/(2 cos z), which is infinite when the sun sits on the horizon.
   const beam = rad.directFraction > 0 ? rad.directFraction * (1 / (2 * rad.cosZenith) - 1) : 0;
-  const shortwave =
-    (rad.solar / (2 * STEFAN_BOLTZMANN * EMIS_GLOBE)) * (1 - ALB_GLOBE) * (beam + 1 + ALB_SFC);
+  const shortwave = (rad.solar / (2 * STEFAN_BOLTZMANN * EMIS_GLOBE)) * (1 - ALB_GLOBE) * (beam + 1 + ALB_SFC);
   const windTerm = Math.max(speed, MIN_SPEED) * D_GLOBE * ((pressure * 100) / R_AIR);
   const convection = (tref: number) => {
     const mu = viscosity(tref);
@@ -341,7 +381,7 @@ function wetBulbTemperature(
 }
 
 /**
- * Pasquill stability class (1–6) from solar radiation and wind in the day,
+ * Pasquill stability class (1 to 6) from solar radiation and wind in the day,
  * or wind and the vertical temperature gradient at night. EPA-454/5-99-005, 6.2.5.
  */
 export function stabilityClass(daytime: boolean, speed: number, solar: number, deltaT: number): number {
@@ -502,7 +542,7 @@ export function psychrometricWetBulb(airTemperature: number, relativeHumidity: n
 
 export interface ReferenceInput {
   year: number;
-  /** Day of year, 1–366 (the C code's month = 0 form). */
+  /** Day of year, 1 to 366 (the C code's month = 0 form). */
   dayOfYear: number;
   /** Hour in local standard time. */
   hour: number;

@@ -26,7 +26,9 @@ export interface GevParams {
 
 /** Unbiased sample L-moments from probability-weighted moments. */
 export function sampleLMoments(data: ArrayLike<number>): LMoments {
-  const x = Array.from(data).filter(Number.isFinite).sort((a, b) => a - b);
+  const x = Array.from(data)
+    .filter(Number.isFinite)
+    .sort((a, b) => a - b);
   const n = x.length;
   if (n < 3) return { l1: Number.NaN, l2: Number.NaN, t3: Number.NaN };
   let b0 = 0;

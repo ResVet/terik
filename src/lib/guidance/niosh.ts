@@ -25,12 +25,7 @@ export const METABOLIC_RATE: Record<Workload | 'rest', number> = {
 };
 
 export type Clothing =
-  | 'workClothes'
-  | 'clothCoveralls'
-  | 'smsCoveralls'
-  | 'polyolefinCoveralls'
-  | 'doubleLayer'
-  | 'vapourBarrier';
+  'workClothes' | 'clothCoveralls' | 'smsCoveralls' | 'polyolefinCoveralls' | 'doubleLayer' | 'vapourBarrier';
 
 /** Clothing adjustment factors, °C-WBGT added to the measured value (ACGIH). */
 export const CLOTHING_ADJUSTMENT: Record<Clothing, number> = {
@@ -50,21 +45,15 @@ export function wbgtLimit(metabolicRate: number, acclimatised: boolean): number 
 
 /** Highest time-weighted metabolic rate (W) allowed at this effective WBGT. */
 export function allowedMetabolicRate(effectiveWbgt: number, acclimatised: boolean): number {
-  return acclimatised
-    ? Math.pow(10, (56.7 - effectiveWbgt) / 11.5)
-    : Math.pow(10, (59.9 - effectiveWbgt) / 14.1);
+  return acclimatised ? Math.pow(10, (56.7 - effectiveWbgt) / 11.5) : Math.pow(10, (59.9 - effectiveWbgt) / 14.1);
 }
 
 /**
- * Share of each hour (0–1) that can be spent working, with rest in the
+ * Share of each hour (0 to 1) that can be spent working, with rest in the
  * same conditions. 1 means continuous work is within the limit; 0 means even
  * resting in place exceeds it.
  */
-export function workFraction(
-  effectiveWbgt: number,
-  workload: Workload,
-  acclimatised: boolean,
-): number {
+export function workFraction(effectiveWbgt: number, workload: Workload, acclimatised: boolean): number {
   if (!Number.isFinite(effectiveWbgt)) return Number.NaN;
   const work = METABOLIC_RATE[workload];
   const rest = METABOLIC_RATE.rest;
