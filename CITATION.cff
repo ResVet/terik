@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: If you use Terik in your work, please cite it as below.
+type: software
+title: 'Terik: heat stress forecasts and a 65-year heat record'
+abstract: >-
+  A web app that turns weather forecasts and ERA5 reanalysis into wet bulb
+  globe temperature (WBGT) with the Liljegren et al. (2008) model, and into
+  work, sport and football advice based on NIOSH, ACSM and FIFPRO guidance.
+  All calculations run in the browser.
+authors:
+  - given-names: Raffa Gamadan
+    family-names: Rifandi
+version: 1.0.0
+date-released: 2026-09-30
+license: MIT
+repository-code: https://github.com/ResVet/terik
+url: https://terik.netlify.app
+keywords:
+  - heat stress
+  - wet bulb globe temperature
+  - WBGT
+  - occupational heat exposure
+  - ERA5
+  - climate trends
+references:
+  - type: article
+    title: Modeling the wet bulb globe temperature using standard meteorological measurements
+    authors:
+      - family-names: Liljegren
+        given-names: J. C.
+      - family-names: Carhart
+        given-names: R. A.
+      - family-names: Lawday
+        given-names: P.
+      - family-names: Tschopp
+        given-names: S.
+      - family-names: Sharp
+        given-names: R.
+    journal: Journal of Occupational and Environmental Hygiene
+    volume: 5
+    issue: '10'
+    start: 645
+    end: 655
+    year: 2008
+    doi: 10.1080/15459620802310770
