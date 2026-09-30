@@ -1,0 +1,120 @@
+.details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary:hover {
+  background: var(--surface-sunk);
+}
+
+.chevron {
+  flex: none;
+  color: var(--muted);
+  transition: transform 0.18s var(--ease-out);
+}
+
+.details[open] .chevron {
+  transform: rotate(90deg);
+}
+
+.scroll {
+  position: relative;
+  max-height: 420px;
+  overflow: auto;
+  border-top: 1px solid var(--line);
+  overscroll-behavior: contain;
+}
+
+.scroll:focus-visible {
+  outline-offset: -2px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table th,
+.table td {
+  padding: 7px 14px;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.table th:first-child {
+  text-align: left;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+
+.table tbody th {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.recent {
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.baseline {
+  background: color-mix(in srgb, var(--ink) 2.5%, transparent);
+}
+
+.downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 550;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.download:hover {
+  border-color: var(--muted);
+  background: var(--surface-sunk);
+}

@@ -1,0 +1,162 @@
+.lab {
+  display: grid;
+  gap: 20px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.controls {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.reset {
+  justify-self: start;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--ink-2);
+}
+
+.reset:hover {
+  border-color: var(--muted);
+  color: var(--ink);
+}
+
+.readout {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 18px;
+  border-radius: var(--radius-m);
+  background: var(--surface-sunk);
+}
+
+.big {
+  font-size: clamp(52px, 12vw, 72px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.advice {
+  font-size: 15px;
+}
+
+.equation {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.eqTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.bar {
+  display: flex;
+  gap: 2px;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar span {
+  flex-basis: 0;
+  transition: flex-grow 0.25s var(--ease-out);
+}
+
+.wetBulb {
+  background: var(--ink);
+}
+
+.globe {
+  background: color-mix(in srgb, var(--ink) 55%, var(--surface-sunk));
+}
+
+.air {
+  background: color-mix(in srgb, var(--ink) 25%, var(--surface-sunk));
+}
+
+.terms {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-size: 13.5px;
+}
+
+.terms div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 12px;
+}
+
+.terms dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+}
+
+.terms dd {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 4px 0 0;
+  font-size: 13.5px;
+}
+
+.facts div {
+  display: flex;
+  gap: 6px;
+}
+
+.facts dt {
+  color: var(--muted);
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .lab {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 28px;
+    padding: 24px;
+  }
+}

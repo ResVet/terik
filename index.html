@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Terik · Heat stress forecast</title>
+    <meta
+      name="description"
+      content="Hour-by-hour heat stress (WBGT) forecasts, safe work and training times, and a 65-year heat record for any place on Earth."
+    />
+    <meta name="theme-color" content="#f6f3ed" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#110f0d" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Terik" />
+    <meta property="og:title" content="Terik · Heat stress forecast" />
+    <meta
+      property="og:description"
+      content="WBGT forecasts, safe work and training times, and a 65-year heat record for any place, computed in your browser."
+    />
+    <meta property="og:image" content="https://terik.netlify.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Terik: a 3D surface of the week's hourly heat stress, coloured by risk level"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      try {
+        var saved = JSON.parse(localStorage.getItem('terik:v1') || '{}');
+        if (saved.theme === 'light' || saved.theme === 'dark') document.documentElement.dataset.theme = saved.theme;
+        if (saved.language === 'id') document.documentElement.lang = 'id';
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Terik needs JavaScript: every number on this site is calculated in your browser.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

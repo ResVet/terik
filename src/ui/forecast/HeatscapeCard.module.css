@@ -1,0 +1,153 @@
+.card {
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  height: clamp(300px, 72vw, 460px);
+  margin: 0 -18px;
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hint {
+  position: absolute;
+  left: 18px;
+  bottom: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.note {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px 20px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface-sunk);
+}
+
+.detailWhen {
+  display: grid;
+  gap: 2px;
+}
+
+.detailDay {
+  font-size: 13px;
+  color: var(--ink-2);
+  text-transform: capitalize;
+}
+
+.detailTime {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.detailValue {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-self: end;
+}
+
+.detailNumber {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.detailUnit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.detailLevel {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 6px;
+}
+
+.detailLevel p {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.detailFacts {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0;
+}
+
+.detailFacts div {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 13px;
+}
+
+.detailFacts dt {
+  color: var(--muted);
+}
+
+.detailFacts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.legend {
+  margin-top: 14px;
+}
+
+@media (min-width: 720px) {
+  .stage {
+    margin: 0 -24px;
+  }
+
+  .hint {
+    left: 24px;
+  }
+
+  .detail {
+    grid-template-columns: auto auto 1fr;
+    grid-template-areas: 'when value level' 'facts facts facts';
+  }
+
+  .detailWhen {
+    grid-area: when;
+  }
+
+  .detailValue {
+    grid-area: value;
+    justify-self: start;
+    padding-right: 8px;
+    border-right: 1px solid var(--line);
+  }
+
+  .detailLevel {
+    grid-area: level;
+    grid-column: auto;
+  }
+
+  .detailFacts {
+    grid-area: facts;
+  }
+}

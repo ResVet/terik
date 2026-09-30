@@ -1,0 +1,106 @@
+.tiles {
+  display: grid;
+  gap: 12px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ink-2);
+}
+
+.lead {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  justify-content: start;
+  align-items: baseline;
+  column-gap: 10px;
+  row-gap: 3px;
+}
+
+.thenValue,
+.nowValue {
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.thenValue {
+  font-size: 22px;
+  font-weight: 550;
+  color: var(--muted);
+  letter-spacing: -0.02em;
+}
+
+.nowValue {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.arrow {
+  align-self: center;
+  color: var(--muted);
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.trend {
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.soFar {
+  margin-top: -6px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.def {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+@media (min-width: 560px) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .tile {
+    padding: 20px;
+  }
+}

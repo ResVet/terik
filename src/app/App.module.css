@@ -1,0 +1,17 @@
+.main {
+  flex: 1;
+  outline: none;
+}
+
+.notFound,
+.fallback {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  color: var(--ink-2);
+}
+
+.notFound {
+  display: grid;
+  gap: 12px;
+  font-size: 18px;
+}

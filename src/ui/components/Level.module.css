@@ -1,0 +1,136 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.swatch {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.s .swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+.s {
+  font-size: 13px;
+  gap: 6px;
+}
+
+.m {
+  font-size: 15px;
+}
+
+.l {
+  font-size: 18px;
+}
+
+.l .swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.scale {
+  position: relative;
+  width: 100%;
+  padding-bottom: 22px;
+}
+
+.compact {
+  padding-bottom: 0;
+}
+
+.twoRows {
+  padding-bottom: 36px;
+}
+
+.track {
+  position: relative;
+  height: 10px;
+}
+
+.bar {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-left: 2px solid var(--surface);
+}
+
+.segment:first-child {
+  border-left: 0;
+}
+
+.marker {
+  position: absolute;
+  top: -5px;
+  width: 4px;
+  height: 20px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--surface);
+  transition: left 0.4s var(--ease-out);
+}
+
+.ticks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 16px;
+  height: 16px;
+}
+
+.tick {
+  position: absolute;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}

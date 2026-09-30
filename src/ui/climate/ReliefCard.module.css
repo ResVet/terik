@@ -1,0 +1,297 @@
+.card {
+  overflow: hidden;
+}
+
+/* Build prompt and problems */
+
+.build {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--page);
+  font-size: 15px;
+  font-weight: 600;
+  transition:
+    transform 0.15s var(--ease-out),
+    box-shadow 0.15s;
+}
+
+.primary:hover {
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.45);
+  transform: translateY(-1px);
+}
+
+.primary:active {
+  transform: translateY(0);
+}
+
+.secondary {
+  min-height: 38px;
+  padding: 7px 14px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.secondary:hover {
+  background: var(--surface-sunk);
+}
+
+.problem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 10px;
+  align-items: start;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  background: var(--surface-sunk);
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.problem svg {
+  margin-top: 1px;
+  color: var(--ink);
+}
+
+.problem .secondary {
+  grid-column: 2;
+  justify-self: start;
+}
+
+/* Download progress */
+
+.progress {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.progressLine {
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.blocks {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3px;
+  height: 10px;
+}
+
+.block,
+.blockDone {
+  border-radius: 2px;
+  background: var(--clay);
+}
+
+.block {
+  background: linear-gradient(90deg, var(--clay) 0%, var(--clay-deep) 50%, var(--clay) 100%) 0 0 / 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.blockDone {
+  background: var(--ink);
+  transition: background 0.3s;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+.blockEnds {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.pause {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.updating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--line);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The relief and its flat twin */
+
+.stage {
+  position: relative;
+  height: clamp(300px, 70vw, 480px);
+  margin: 0 -18px;
+}
+
+.loading {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hint {
+  position: absolute;
+  left: 18px;
+  bottom: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.flat {
+  padding-top: 4px;
+}
+
+/* Selected cell */
+
+.detail {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px 20px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: var(--surface-sunk);
+}
+
+.when {
+  display: grid;
+  gap: 2px;
+}
+
+.year {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.days {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  justify-self: end;
+}
+
+.number {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.unit {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.level {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+}
+
+.level p {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-top: 14px;
+}
+
+.pendingKey {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.pendingKey::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--clay);
+  box-shadow: inset 0 0 0 1px var(--clay-deep);
+}
+
+@media (min-width: 720px) {
+  .stage {
+    margin: 0 -24px;
+  }
+
+  .hint {
+    left: 24px;
+  }
+
+  .detail {
+    grid-template-columns: auto auto 1fr;
+  }
+
+  .value {
+    justify-self: start;
+    padding-right: 20px;
+    border-right: 1px solid var(--line);
+  }
+
+  .level {
+    grid-column: auto;
+  }
+}

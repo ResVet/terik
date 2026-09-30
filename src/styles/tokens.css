@@ -1,0 +1,131 @@
+/*
+ * Design tokens. The interface is paper and ink; the only strong colours are
+ * the five heat-risk levels, so they are never used for anything else.
+ *
+ * Level ramps: light steps read light to dark (monotone OKLCH lightness,
+ * 0.752 to 0.375) so the order survives greyscale and colour-vision
+ * deficiencies; dark steps are re-picked for the dark surface (all >= 3:1).
+ * The on-level colours give at least 4.5:1 for text on each fill.
+ * Levels always travel with their number and name, never colour alone.
+ */
+
+:root {
+  color-scheme: light;
+
+  --page: #f6f3ed;
+  --surface: #fcfaf6;
+  --surface-sunk: #efebe3;
+  --ink: #1e1a15;
+  --ink-2: #554f47;
+  --muted: #6b645b;
+  --line: #e2ddd5;
+  --line-soft: #ebe7e1;
+  --focus: #1e1a15;
+  --overlay: rgb(30 26 21 / 0.45);
+  --shadow: 0 1px 2px rgb(30 26 21 / 0.04), 0 8px 24px -12px rgb(30 26 21 / 0.12);
+  --clay: #ddd6ca;
+  --clay-deep: #cbc2b3;
+  /* Brand sun, kept apart from the level colours. */
+  --sun: #e0631f;
+
+  --level-1: #70c39b;
+  --level-2: #bd9600;
+  --level-3: #ca5000;
+  --level-4: #b01c30;
+  --level-5: #711744;
+  /* Text that sits on a level fill. */
+  --on-level-1: #1e1a15;
+  --on-level-2: #1e1a15;
+  --on-level-3: #ffffff;
+  --on-level-4: #ffffff;
+  --on-level-5: #ffffff;
+
+  --font-sans:
+    'Schibsted Grotesk Variable', 'Schibsted Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --radius-l: 16px;
+
+  --gutter: 16px;
+  --max: 1240px;
+  --header-h: 60px;
+  --tabbar-h: 0px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --gutter: 32px;
+    --header-h: 64px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --page: #110f0d;
+    --surface: #1a1614;
+    --surface-sunk: #0c0b09;
+    --ink: #efebe4;
+    --ink-2: #bfbab2;
+    --muted: #958f86;
+    --line: #2e2b27;
+    --line-soft: #24211e;
+    --focus: #efebe4;
+    --overlay: rgb(0 0 0 / 0.6);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+    --clay: #34302a;
+    --clay-deep: #2a2622;
+    --sun: #ef7a31;
+
+    --level-1: #45a075;
+    --level-2: #e0ba31;
+    --level-3: #f57a23;
+    --level-4: #d9353f;
+    --level-5: #bf50a0;
+    --on-level-1: #0c0b09;
+    --on-level-2: #0c0b09;
+    --on-level-3: #0c0b09;
+    --on-level-4: #ffffff;
+    --on-level-5: #0c0b09;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #110f0d;
+  --surface: #1a1614;
+  --surface-sunk: #0c0b09;
+  --ink: #efebe4;
+  --ink-2: #bfbab2;
+  --muted: #958f86;
+  --line: #2e2b27;
+  --line-soft: #24211e;
+  --focus: #efebe4;
+  --overlay: rgb(0 0 0 / 0.6);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --clay: #34302a;
+  --clay-deep: #2a2622;
+  --sun: #ef7a31;
+
+  --level-1: #45a075;
+  --level-2: #e0ba31;
+  --level-3: #f57a23;
+  --level-4: #d9353f;
+  --level-5: #bf50a0;
+  --on-level-1: #0c0b09;
+  --on-level-2: #0c0b09;
+  --on-level-3: #0c0b09;
+  --on-level-4: #ffffff;
+  --on-level-5: #0c0b09;
+}

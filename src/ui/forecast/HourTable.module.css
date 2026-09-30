@@ -1,0 +1,136 @@
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 0 -4px 14px;
+  padding: 2px 4px;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: grid;
+  gap: 2px;
+  flex: none;
+  min-width: 76px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  text-align: left;
+}
+
+.tab[aria-selected='true'] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.tabDay {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.tabPeak {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabSwatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.scroller {
+  position: relative;
+  overflow-x: auto;
+  margin: 0 -18px;
+  padding: 0 18px;
+  outline-offset: -2px;
+}
+
+.table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table th,
+.table td {
+  padding: 8px 10px;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.table thead th {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom-color: var(--line);
+}
+
+.table th[scope='row'],
+.table thead th:first-child {
+  position: sticky;
+  left: 0;
+  text-align: left;
+  background: var(--surface);
+  font-weight: 600;
+}
+
+.table tbody tr {
+  cursor: pointer;
+}
+
+.table tbody tr:hover td,
+.table tbody tr:hover th {
+  background: var(--surface-sunk);
+}
+
+.selected td,
+.selected th {
+  background: color-mix(in srgb, var(--ink) 6%, var(--surface)) !important;
+}
+
+.past {
+  color: var(--muted);
+}
+
+.strong {
+  font-weight: 650;
+}
+
+.levelChip {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.units {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (min-width: 720px) {
+  .scroller {
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+}

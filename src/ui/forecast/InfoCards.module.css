@@ -1,0 +1,105 @@
+.stroke {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--level-4) 9%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--level-4) 28%, var(--line));
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.alert svg {
+  color: var(--level-4);
+  flex: none;
+}
+
+.signs {
+  font-size: 15px;
+}
+
+.steps {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.steps svg {
+  margin-top: 1px;
+  color: var(--ink-2);
+}
+
+.exhaustion {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+}
+
+.exhaustion h3 {
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.exhaustion p {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.source {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 18px 0 16px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.term b {
+  font-weight: 700;
+}
+
+.term sub {
+  font-size: 0.6em;
+  color: var(--ink-2);
+}
+
+.plus {
+  color: var(--muted);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 15px;
+}

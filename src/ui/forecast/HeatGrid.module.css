@@ -1,0 +1,116 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 0 2px;
+  scrollbar-width: thin;
+}
+
+.grid {
+  display: grid;
+  gap: 2px;
+  min-width: 320px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(44px, 64px) repeat(24, minmax(9px, 1fr));
+  gap: 2px;
+  align-items: center;
+}
+
+.corner {
+  display: block;
+}
+
+.hourHead {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  padding-bottom: 4px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.minor {
+  visibility: hidden;
+}
+
+.dayHead {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  padding-right: 6px;
+  min-width: 0;
+}
+
+.dayName {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.dayDate {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cell {
+  display: block;
+  height: 30px;
+  border-radius: 3px;
+  background: var(--surface-sunk);
+  cursor: pointer;
+  transition:
+    transform 0.12s var(--ease-out),
+    opacity 0.2s;
+  outline-offset: 1px;
+}
+
+.cell:hover {
+  transform: scaleY(1.12);
+}
+
+.past {
+  opacity: 0.38;
+}
+
+.selected {
+  box-shadow:
+    0 0 0 2px var(--surface),
+    0 0 0 4px var(--ink);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 720px) {
+  .cell {
+    height: 34px;
+  }
+
+  .minor {
+    visibility: visible;
+    opacity: 0.55;
+  }
+
+  .hourHead {
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 719px) {
+  .hourHead span:not(.minor) {
+    font-size: 9.5px;
+  }
+}
+
+@media (forced-colors: active) {
+  .cell {
+    forced-color-adjust: none;
+    border: 1px solid CanvasText;
+  }
+}

@@ -1,0 +1,9 @@
+/** WebGL check kept outside the three.js chunk so the main bundle stays small. */
+export function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+  } catch {
+    return false;
+  }
+}

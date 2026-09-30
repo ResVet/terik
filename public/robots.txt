@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://terik.netlify.app/sitemap.xml
