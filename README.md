@@ -4,7 +4,7 @@ Terik forecasts heat stress for people who work, train or play outside. It takes
 
 The name is the Indonesian word for the scorching heat of the sun.
 
-Live at [terik.netlify.app](https://terik.netlify.app). All of the calculation happens in your browser; there is no server, account or tracking.
+Live at [raffagmd-terik.netlify.app](https://raffagmd-terik.netlify.app). All of the calculation happens in your browser; there is no server, account or tracking.
 
 ![The forecast page: current WBGT and advice on the left, the coming week as a 3D surface on the right](docs/forecast.png)
 
